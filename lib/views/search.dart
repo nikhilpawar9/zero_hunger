@@ -79,7 +79,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         controller: searchTextEditingController,
                         style: TextStyle(color: Colors.black),
                         decoration: InputDecoration(
-                          hintText: "search organizations" ,
+                          hintText: "search organizations",
                           hintStyle: TextStyle(
                             color: Colors.black38,
                           ),
@@ -107,7 +107,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   ],
                 ),
               ),
-              createChatroomAndStartConversation().SearchTile(searchTextEditingController.text)
+              createChatroomAndStartConversation()
+                  .SearchTile(searchTextEditingController.text)
             ],
           ),
         ),
@@ -119,18 +120,15 @@ class _SearchScreenState extends State<SearchScreen> {
 ///create chatroom, send user to conv screen, push replacemnt
 DatabaseMethods databaseMethods = new DatabaseMethods();
 
-createChatroomAndStartConversation(
-    { String userName}) {
-
-  String chatRoomId = getChatRoomId( userName, Constants.myName);
+createChatroomAndStartConversation({String userName, context}) {
+  String chatRoomId = getChatRoomId(userName, Constants.myName);
   List<String> users = [userName, Constants.myName];
 
   Map<String, dynamic> charRoomMap = {"users": users, "chatroomId": chatRoomId};
-  
-  
+
   databaseMethods.createChatRoom(chatRoomId, charRoomMap);
   Navigator.push(
-    context,MaterialPageRoute(builder: (context) => ConversationScreen()));
+      context, MaterialPageRoute(builder: (context) => ConversationScreen()));
 
   Widget SearchTile({String userName, String userEmail}) {
     return Container(
