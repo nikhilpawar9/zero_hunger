@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:zero_hunger/helper/helperfunctions.dart';
+import 'package:zero_hunger/services/auth.dart';
+import 'package:zero_hunger/services/database.dart';
+import 'package:zero_hunger/views/chatRoomsScreen.dart';
 import 'package:zero_hunger/widgets/widget.dart';
 
 class SignIn extends StatefulWidget {
@@ -10,11 +15,53 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final formKey = GlobalKey<FormState>();
+  AuthMethods authMethods = new AuthMethods();
+  DatabaseMethods databaseMethods = new DatabaseMethods();
+  TextEditingController emailTextEditingController =
+      new TextEditingController();
+  TextEditingController passwordTextEditingController =
+      new TextEditingController();
+
+  bool isLoading = false;
+  QuerySnapshot snapshotUserInfo;
+  signIn() {
+    if (formKey.currentState.validate()) {
+      HelperFunctions.saveUserEmailSharedPreference(
+          emailTextEditingController.text);
+
+      setState(() {
+        isLoading = true;
+      });
+
+      databaseMethods
+          .getUserByUserEmail(emailTextEditingController.text)
+          .then((val) {
+        snapshotUserInfo = val;
+        HelperFunctions.saveUserEmailSharedPreference(
+            snapshotUserInfo.docs[0].data()["name"]);
+      });
+
+      authMethods
+          .signInWithEmailandPassword(emailTextEditingController.text,
+              passwordTextEditingController.text)
+          .then((val) {
+        if (val != null) {
+          databaseMethods.getUserByUserEmail(emailTextEditingController.text);
+          HelperFunctions.saveUserLoggedInSharedPreference(true);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => ChatRoom()));
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarMain(context),
-      body: Container(
+      body: isLoading ? Container(child: Center( child: CircularProgressIndicator())) :
+       Container(
         height: MediaQuery.of(context).size.height - 50,
         alignment: Alignment.bottomCenter,
         child: Container(
@@ -22,8 +69,34 @@ class _SignInState extends State<SignIn> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextField(decoration: textFieldInputDecoration("Email")),
-              TextField(decoration: textFieldInputDecoration("Password")),
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                        controller: emailTextEditingController,
+                        style: simpleTextStyle(),
+                        validator: (val) {
+                          return RegExp(
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(val)
+                              ? null
+                              : "Please Provide valid email";
+                        },
+                        decoration: textFieldInputDecoration("Email")),
+                    TextFormField(
+                        controller: passwordTextEditingController,
+                        obscureText: true,
+                        style: simpleTextStyle(),
+                        validator: (val) {
+                          return val.length < 6
+                              ? "Enter Password 6+ characters"
+                              : null;
+                        },
+                        decoration: textFieldInputDecoration("Password")),
+                  ],
+                ),
+              ),
               SizedBox(
                 height: 8,
               ),
@@ -40,17 +113,22 @@ class _SignInState extends State<SignIn> {
               SizedBox(
                 height: 8,
               ),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(vertical: 20),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Text(
-                  "Sign In",
-                  style: mediumTextStyle(),
+              GestureDetector(
+                onTap: () {
+                  signIn();
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Text(
+                    "Sign In",
+                    style: mediumTextStyle(),
+                  ),
                 ),
               ),
               SizedBox(

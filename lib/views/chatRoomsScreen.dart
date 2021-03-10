@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:zero_hunger/helper/constants.dart';
+import 'package:zero_hunger/helper/helperfunctions.dart';
 import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/helper/authenticate.dart';
 import 'package:zero_hunger/views/search.dart';
@@ -11,6 +12,19 @@ class ChatRoom extends StatefulWidget {
 
 class _ChatRoomState extends State<ChatRoom> {
   AuthMethods authMethods = new AuthMethods();
+  Constants constants = new Constants();
+  ///HelperFunctions helperFunctions = new HelperFunctions();
+
+  @override
+  void initState() {
+    getUserInfo();
+    super.initState();
+  }
+
+  getUserInfo() async {
+    Constants.myName = await HelperFunctions.getUserNameSharedPreference();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

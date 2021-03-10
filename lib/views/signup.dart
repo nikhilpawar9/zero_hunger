@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zero_hunger/helper/helperfunctions.dart';
 import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/services/database.dart';
 import 'package:zero_hunger/views/home.dart';
@@ -26,23 +27,28 @@ class _SignUpState extends State<SignUp> {
       new TextEditingController();
 
   signMeUp() {
-    Map<String, String> userInfoMap = {
-      "name": userNameTextEditingController.text,
-      "email" : emailTextEditingController.text,
-    };
-
-    databaseMethods.uploadUserInfo(userInfoMap);
-
     if (formKey.currentState.validate()) {
+      Map<String, String> userInfoMap = {
+        "name": userNameTextEditingController.text,
+        "email": emailTextEditingController.text,
+      };
+
+      databaseMethods.uploadUserInfo(userInfoMap);
+
+      HelperFunctions.saveUserEmailSharedPreference(emailTextEditingController.text);
+      HelperFunctions.saveUserNameSharedPreference(userNameTextEditingController.text);
+
       setState(() {
         isLoading = true;
       });
 
-      authMethods
+      authMethods 
           .signUpwithEmailAndPassword(emailTextEditingController.text,
               passwordTextEditingController.text)
           .then((val) {
         //print("${val.uId}");
+        HelperFunctions.saveUserLoggedInSharedPreference(true);
+
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Home()));
       });
