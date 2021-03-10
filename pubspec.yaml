@@ -27,6 +27,7 @@ dependencies:
   firebase_auth: ^0.20.1
   cloud_firestore: ^0.16.0+1
   shared_preferences: ^0.5.12+4
+  url_launcher: ^6.0.2
 
 
 dev_dependencies:

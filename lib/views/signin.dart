@@ -5,6 +5,7 @@ import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/services/database.dart';
 import 'package:zero_hunger/views/chatRoomsScreen.dart';
 import 'package:zero_hunger/widgets/widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggle;
@@ -145,6 +146,25 @@ class _SignInState extends State<SignIn> {
                 child: Text(
                   "Sign In with Google",
                   style: mediumTextStyle(),
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+                GestureDetector(
+                onTap: () => launch('https://docs.google.com/forms/d/e/1FAIpQLSdjtVyEfkzfolqWn0DHiTmJepM-vLyoLzFv6LPMFeGkOnk_6w/viewform?usp=sf_link'),
+                child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Text(
+                    "Sign Up As Organization",
+                    style: mediumTextStyle(),
+                  ),
                 ),
               ),
               SizedBox(
