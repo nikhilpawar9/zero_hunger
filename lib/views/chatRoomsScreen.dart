@@ -3,7 +3,7 @@ import 'package:zero_hunger/helper/constants.dart';
 import 'package:zero_hunger/helper/helperfunctions.dart';
 import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/helper/authenticate.dart';
-import 'package:zero_hunger/views/search.dart';
+// import 'package:zero_hunger/views/search.dart';
 
 class ChatRoom extends StatefulWidget {
   @override
@@ -50,8 +50,8 @@ class _ChatRoomState extends State<ChatRoom> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SearchScreen()));
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => SearchScreen()));
         },
       ),
     );
