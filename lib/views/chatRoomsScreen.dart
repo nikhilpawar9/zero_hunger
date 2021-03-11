@@ -3,6 +3,7 @@ import 'package:zero_hunger/helper/constants.dart';
 import 'package:zero_hunger/helper/helperfunctions.dart';
 import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/helper/authenticate.dart';
+import 'package:zero_hunger/views/upload.dart';
 // import 'package:zero_hunger/views/search.dart';
 
 class ChatRoom extends StatefulWidget {
@@ -46,13 +47,25 @@ class _ChatRoomState extends State<ChatRoom> {
             ),
           )
         ],
+        backgroundColor: Colors.red[500],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.search),
-        onPressed: () {
+      // floatingActionButton: FloatingActionButton(
+        // child: Icon(Icons.search),
+        // onPressed: () {
           // Navigator.push(
           //     context, MaterialPageRoute(builder: (context) => SearchScreen()));
+        // },
+      // ),
+
+      
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+           Navigator.push(
+               context, MaterialPageRoute(builder: (context) => Upload()));
         },
+        label: Text('Upload'),
+        icon: Icon(Icons.favorite),
+        backgroundColor: Colors.red[500],
       ),
     );
   }

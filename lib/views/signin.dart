@@ -99,7 +99,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               SizedBox(
-                height: 8,
+                height: 4,
               ),
               Container(
                 alignment: Alignment.centerRight,
@@ -133,7 +133,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               SizedBox(
-                height: 16,
+                height: 4,
               ),
               Container(
                 alignment: Alignment.center,
@@ -149,7 +149,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               SizedBox(
-                height: 16,
+                height: 4,
               ),
                 GestureDetector(
                 onTap: () => launch('https://docs.google.com/forms/d/e/1FAIpQLSdjtVyEfkzfolqWn0DHiTmJepM-vLyoLzFv6LPMFeGkOnk_6w/viewform?usp=sf_link'),
