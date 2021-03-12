@@ -64,7 +64,7 @@ class _ChatRoomState extends State<ChatRoom> {
                context, MaterialPageRoute(builder: (context) => Upload()));
         },
         label: Text('Upload'),
-        icon: Icon(Icons.favorite),
+        icon: Icon(Icons.file_upload),
         backgroundColor: Colors.red[500],
       ),
     );

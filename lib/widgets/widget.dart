@@ -6,6 +6,8 @@ Widget appBarMain(BuildContext context) {
       "assets/images/logo.png",
       height: 50,
     ),
+    backgroundColor: Colors.red[500],
+
   );
 }
 
@@ -27,6 +29,6 @@ TextStyle simpleTextStyle() {
 TextStyle mediumTextStyle() {
   return TextStyle(
     fontSize: 17,
-    color: Colors.black87,
+    color: Colors.white,
   );
 }

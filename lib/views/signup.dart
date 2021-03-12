@@ -135,7 +135,7 @@ class _SignUpState extends State<SignUp> {
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.symmetric(vertical: 20),
                           decoration: BoxDecoration(
-                            color: Colors.blue,
+                            color: Colors.red[500],
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Text(
@@ -156,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.symmetric(vertical: 20),
                           decoration: BoxDecoration(
-                            color: Colors.blue,
+                            color: Colors.red[500],
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Text(
@@ -168,31 +168,31 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         height: 16,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Don't have account?",
-                            style: mediumTextStyle(),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              widget.toggle();
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 8),
-                              child: Text(
-                                "Register now",
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  color: Colors.black87,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     Text(
+                      //       "Don't have account?",
+                      //       style: mediumTextStyle(),
+                      //     ),
+                      //     GestureDetector(
+                      //       onTap: () {
+                      //         widget.toggle();
+                      //       },
+                      //       child: Container(
+                      //         padding: EdgeInsets.symmetric(vertical: 8),
+                      //         child: Text(
+                      //           "Register now",
+                      //           style: TextStyle(
+                      //             fontSize: 17,
+                      //             color: Colors.black87,
+                      //             decoration: TextDecoration.underline,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                       SizedBox(
                         height: 50,
                       ),
