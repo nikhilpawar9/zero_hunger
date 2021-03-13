@@ -5,6 +5,7 @@ import 'package:zero_hunger/helper/constants.dart';
 import 'package:zero_hunger/helper/helperfunctions.dart';
 import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/helper/authenticate.dart';
+import 'package:zero_hunger/views/edit_feed.dart';
 import 'package:zero_hunger/views/upload.dart';
 
 class DisplayFeed extends StatefulWidget {
@@ -103,6 +104,67 @@ class _DisplayFeedState extends State<DisplayFeed> {
               ),
             ],
           ),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => EditFeed(
+                                contactKey: contact['key'],
+                              )));
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.edit,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    SizedBox(width: 16),
+                    Text(
+                      'Edit',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.red,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.delete,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    SizedBox(width: 16),
+                    Text(
+                      'Delete',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.red,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+            ],
+          )
         ],
       ),
     );
@@ -138,6 +200,7 @@ class _DisplayFeedState extends State<DisplayFeed> {
           itemBuilder: (BuildContext context, DataSnapshot snapshot,
               Animation<double> animation, int index) {
             Map contact = snapshot.value;
+            contact['key'] = snapshot.key;
             return _buildContactItem(contact: contact);
           },
         ),
