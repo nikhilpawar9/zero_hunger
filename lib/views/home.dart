@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zero_hunger/helper/authenticate.dart';
 import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/views/chatRoomsScreen.dart';
+import 'package:zero_hunger/views/feed.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => ChatRoom()));
+                context, MaterialPageRoute(builder: (context) => DisplayFeed()));
           },
           child: Icon(Icons.navigation),
           backgroundColor: Colors.blue),
