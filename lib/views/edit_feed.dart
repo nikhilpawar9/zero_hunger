@@ -1,9 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:zero_hunger/helper/authenticate.dart';
-import 'package:zero_hunger/services/auth.dart';
-import 'package:zero_hunger/views/chatRoomsScreen.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class EditFeed extends StatefulWidget {

@@ -1,8 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:zero_hunger/helper/constants.dart';
-import 'package:zero_hunger/helper/helperfunctions.dart';
 import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/helper/authenticate.dart';
 import 'package:zero_hunger/views/edit_feed.dart';
@@ -15,20 +13,15 @@ class DisplayFeed extends StatefulWidget {
 
 class _DisplayFeedState extends State<DisplayFeed> {
   AuthMethods authMethods = new AuthMethods();
-  Constants constants = new Constants();
 
-  ///HelperFunctions helperFunctions = new HelperFunctions();
   Query _ref;
+  DatabaseReference reference =
+      FirebaseDatabase.instance.reference().child('Contacts');
 
   @override
   void initState() {
-    getUserInfo();
     super.initState();
     _ref = FirebaseDatabase.instance.reference().child('Contacts');
-  }
-
-  getUserInfo() async {
-    Constants.myName = await HelperFunctions.getUserNameSharedPreference();
   }
 
   Widget _buildContactItem({Map contact}) {
@@ -141,7 +134,9 @@ class _DisplayFeedState extends State<DisplayFeed> {
                 width: 20,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  _showDeleteDailog(contact: contact);
+                },
                 child: Row(
                   children: [
                     Icon(
@@ -168,6 +163,32 @@ class _DisplayFeedState extends State<DisplayFeed> {
         ],
       ),
     );
+  }
+
+  _showDeleteDailog({Map contact}) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Delete ${contact['name']}'),
+            content: Text('Are you sure you want to delte?'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('cancel')),
+              TextButton(
+                  onPressed: () {
+                    reference
+                        .child(contact['key'])
+                        .remove()
+                        .whenComplete(() => Navigator.pop(context));
+                  },
+                  child: Text('Delete'))
+            ],
+          );
+        });
   }
 
   @override

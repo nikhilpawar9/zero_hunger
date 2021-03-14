@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:zero_hunger/helper/helperfunctions.dart';
 import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/services/database.dart';
-import 'package:zero_hunger/views/chatRoomsScreen.dart';
 import 'package:zero_hunger/views/feed.dart';
 import 'package:zero_hunger/widgets/widget.dart';
 import 'package:url_launcher/url_launcher.dart';

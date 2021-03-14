@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zero_hunger/helper/authenticate.dart';
 import 'package:zero_hunger/services/auth.dart';
-import 'package:zero_hunger/views/chatRoomsScreen.dart';
 import 'package:zero_hunger/views/feed.dart';
 
 class Home extends StatefulWidget {
