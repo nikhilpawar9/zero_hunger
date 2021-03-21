@@ -158,22 +158,22 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: 4,
                 ),
-                  GestureDetector(
-                  onTap: () => launch('https://docs.google.com/forms/d/e/1FAIpQLSdjtVyEfkzfolqWn0DHiTmJepM-vLyoLzFv6LPMFeGkOnk_6w/viewform?usp=sf_link'),
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.red[500],
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Text(
-                      "Sign Up As Organization",
-                      style: mediumTextStyle(),
-                    ),
-                  ),
-                ),
+                //   GestureDetector(
+                //   onTap: () => launch('https://docs.google.com/forms/d/e/1FAIpQLSdjtVyEfkzfolqWn0DHiTmJepM-vLyoLzFv6LPMFeGkOnk_6w/viewform?usp=sf_link'),
+                //   child: Container(
+                //     alignment: Alignment.center,
+                //     width: MediaQuery.of(context).size.width,
+                //     padding: EdgeInsets.symmetric(vertical: 20),
+                //     decoration: BoxDecoration(
+                //       color: Colors.red[500],
+                //       borderRadius: BorderRadius.circular(30),
+                //     ),
+                //     child: Text(
+                //       "Sign Up As Organization",
+                //       style: mediumTextStyle(),
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
                   height: 16,
                 ),
