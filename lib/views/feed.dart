@@ -171,13 +171,13 @@ class _DisplayFeedState extends State<DisplayFeed> {
         builder: (context) {
           return AlertDialog(
             title: Text('Delete ${contact['name']}'),
-            content: Text('Are you sure you want to delte?'),
+            content: Text('Are you sure you want to Delete?'),
             actions: [
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('cancel')),
+                  child: Text('Cancel')),
               TextButton(
                   onPressed: () {
                     reference
