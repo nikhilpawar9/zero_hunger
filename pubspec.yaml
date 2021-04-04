@@ -29,6 +29,7 @@ dependencies:
   shared_preferences: ^2.0.4
   url_launcher: ^6.0.2
   firebase_database: ^6.1.0
+  provider: ^5.0.0
 
 
 dev_dependencies:

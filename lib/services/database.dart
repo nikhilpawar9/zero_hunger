@@ -1,30 +1,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:zero_hunger/models/feedinfo.dart';
 
 class DatabaseMethods {
-  getUserByUsername(String username) async {
-    return await FirebaseFirestore.instance
-        .collection("users")
-        .where("name", isEqualTo: username)
-        .get();
-  }
-  getUserByUserEmail(String userEmail) async {
-    return await FirebaseFirestore.instance
-        .collection("users")
-        .where("email", isEqualTo: userEmail)
-        .get();
-  }
-
   uploadUserInfo(userMap) {
     FirebaseFirestore.instance.collection("users").add(userMap);
   }
+}
 
-  createChatRoom(String chatRoomId, chatRoomMap) {
-    FirebaseFirestore.instance
-        .collection("ChatRoom")
-        .doc(chatRoomId)
-        .set(chatRoomMap)
-        .catchError((e) {
-      print(e.toString());
+class DatabaseService {
+  final String uid;
+  DatabaseService({this.uid});
+  final CollectionReference feedCollection =
+      FirebaseFirestore.instance.collection('feed');
+
+  Future <void>updateUserData(String name, String desc, String location) async {
+    return await feedCollection.doc(uid).set({
+      'name': name,
+      'description': desc,
+      'location': location,
     });
+  }
+
+  //feed list from snapshot
+  List<Feed> _feedListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Feed(
+        name: doc.data()['name'] ?? '',
+        description: doc.data()['description'] ?? '',
+        location: doc.data()['location'] ?? '',
+      );
+    }).toList();
+  }
+
+  //get feed stream
+  Stream<List<Feed>> get feed {
+    return feedCollection.snapshots().map(_feedListFromSnapshot);
   }
 }

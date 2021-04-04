@@ -3,6 +3,7 @@ import 'package:zero_hunger/helper/helperfunctions.dart';
 import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/services/database.dart';
 import 'package:zero_hunger/views/home.dart';
+import 'package:zero_hunger/views/signin.dart';
 import 'package:zero_hunger/widgets/widget.dart';
 
 class SignUp extends StatefulWidget {
@@ -28,25 +29,22 @@ class _SignUpState extends State<SignUp> {
 
   signMeUp() {
     if (formKey.currentState.validate()) {
-      Map<String, String> userInfoMap = {
-        "name": userNameTextEditingController.text,
-        "email": emailTextEditingController.text,
-      };
-
-      databaseMethods.uploadUserInfo(userInfoMap);
-
-      HelperFunctions.saveUserEmailSharedPreference(emailTextEditingController.text);
-      HelperFunctions.saveUserNameSharedPreference(userNameTextEditingController.text);
+      HelperFunctions.saveUserEmailSharedPreference(
+          emailTextEditingController.text);
+      HelperFunctions.saveUserNameSharedPreference(
+          userNameTextEditingController.text);
 
       setState(() {
         isLoading = true;
       });
 
-      authMethods 
-          .signUpwithEmailAndPassword(emailTextEditingController.text,
-              passwordTextEditingController.text)
+      authMethods
+          .signUpwithEmailAndPassword(
+        emailTextEditingController.text,
+        passwordTextEditingController.text,
+        userNameTextEditingController.text,
+      )
           .then((val) {
-        //print("${val.uId}");
         HelperFunctions.saveUserLoggedInSharedPreference(true);
 
         Navigator.pushReplacement(
@@ -63,8 +61,8 @@ class _SignUpState extends State<SignUp> {
           ? Container(child: Center(child: CircularProgressIndicator()))
           : SingleChildScrollView(
               child: Container(
-                height: MediaQuery.of(context).size.height - 50,
-                alignment: Alignment.bottomCenter,
+                height: MediaQuery.of(context).size.height - 90,
+                alignment: Alignment.center,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
@@ -110,21 +108,27 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 16,
                       ),
-                      Container(
-                        alignment: Alignment.centerRight,
+                      GestureDetector(
+                        onTap: () {
+                          widget.toggle();
+                          
+                        },
                         child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: Text(
-                            "Forgot Password?",
-                            style: simpleTextStyle(),
+                          alignment: Alignment.centerRight,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            child: Text(
+                              "Already have a account? Sign In",
+                              style: simpleTextStyle(),
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 20,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -144,58 +148,9 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          signMeUp();
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(vertical: 20),
-                          decoration: BoxDecoration(
-                            color: Colors.red[500],
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Text(
-                            "Sign Up with Google",
-                            style: mediumTextStyle(),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   children: [
-                      //     Text(
-                      //       "Don't have account?",
-                      //       style: mediumTextStyle(),
-                      //     ),
-                      //     GestureDetector(
-                      //       onTap: () {
-                      //         widget.toggle();
-                      //       },
-                      //       child: Container(
-                      //         padding: EdgeInsets.symmetric(vertical: 8),
-                      //         child: Text(
-                      //           "Register now",
-                      //           style: TextStyle(
-                      //             fontSize: 17,
-                      //             color: Colors.black87,
-                      //             decoration: TextDecoration.underline,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      SizedBox(
-                        height: 50,
-                      ),
+                      
+                      
+                      
                     ],
                   ),
                 ),

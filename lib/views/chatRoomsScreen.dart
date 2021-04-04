@@ -3,7 +3,7 @@ import 'package:zero_hunger/helper/constants.dart';
 import 'package:zero_hunger/helper/helperfunctions.dart';
 import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/helper/authenticate.dart';
-import 'package:zero_hunger/views/feed.dart';
+import 'package:zero_hunger/views/home/feed.dart';
 
 class ChatRoom extends StatefulWidget {
   @override

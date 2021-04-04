@@ -16,25 +16,32 @@ class _ResetPassState extends State<ResetPass> {
       appBar: AppBar(title: Text('Reset Password'),
       backgroundColor: Colors.red[500],),
       body: Column(
+        
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(  
-                hintText: 'Email'
-              ),
-               onChanged: (value) {
-                setState(() {
-                  _email = value.trim();
-                });
-              },
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              RaisedButton(
+          SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height ,
+              alignment: Alignment.center,            
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(  
+                        hintText: 'Email'
+                      ),
+                       onChanged: (value) {
+                        setState(() {
+                          _email = value.trim();
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(height:16),
+
+                   RaisedButton(
                 child: Text('Send Request'),
                 textColor: Colors.white,
                 onPressed: () {
@@ -43,9 +50,15 @@ class _ResetPassState extends State<ResetPass> {
                 },
                 color: Colors.red[500],
               ),
+                ],
+                
+               
 
-            ],
+              
+              ),
+            ),
           ),
+          
 
         ],),
     );

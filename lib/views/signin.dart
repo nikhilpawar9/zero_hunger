@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:zero_hunger/helper/helperfunctions.dart';
 import 'package:zero_hunger/services/auth.dart';
 import 'package:zero_hunger/services/database.dart';
-import 'package:zero_hunger/views/feed.dart';
+import 'package:zero_hunger/views/home/feed.dart';
 import 'package:zero_hunger/views/forgetpassword.dart';
 import 'package:zero_hunger/widgets/widget.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggle;
@@ -32,14 +31,6 @@ class _SignInState extends State<SignIn> {
       HelperFunctions.saveUserEmailSharedPreference(
           emailTextEditingController.text);
 
-      databaseMethods
-          .getUserByUserEmail(emailTextEditingController.text)
-          .then((val) {
-        snapshotUserInfo = val;
-        HelperFunctions.saveUserEmailSharedPreference(
-            snapshotUserInfo.docs[0].data()["name"]);
-      });
-
       setState(() {
         isLoading = true;
       });
@@ -49,8 +40,6 @@ class _SignInState extends State<SignIn> {
               passwordTextEditingController.text)
           .then((val) {
         if (val != null) {
-          databaseMethods.getUserByUserEmail(emailTextEditingController.text);
-
           HelperFunctions.saveUserLoggedInSharedPreference(true);
 
           Navigator.pushReplacement(
@@ -69,7 +58,7 @@ class _SignInState extends State<SignIn> {
           : SingleChildScrollView(
               child: Container(
                 height: MediaQuery.of(context).size.height - 90,
-                alignment: Alignment.bottomCenter,
+                alignment: Alignment.center,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
@@ -146,41 +135,6 @@ class _SignInState extends State<SignIn> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      // Container(
-                      //   alignment: Alignment.center,
-                      //   width: MediaQuery.of(context).size.width,
-                      //   padding: EdgeInsets.symmetric(vertical: 20),
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.red[500],
-                      //     borderRadius: BorderRadius.circular(30),
-                      //   ),
-                      //   child: Text(
-                      //     "Sign In with Google",
-                      //     style: mediumTextStyle(),
-                      //   ),
-                      // ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      //   GestureDetector(
-                      //   onTap: () => launch('https://docs.google.com/forms/d/e/1FAIpQLSdjtVyEfkzfolqWn0DHiTmJepM-vLyoLzFv6LPMFeGkOnk_6w/viewform?usp=sf_link'),
-                      //   child: Container(
-                      //     alignment: Alignment.center,
-                      //     width: MediaQuery.of(context).size.width,
-                      //     padding: EdgeInsets.symmetric(vertical: 20),
-                      //     decoration: BoxDecoration(
-                      //       color: Colors.red[500],
-                      //       borderRadius: BorderRadius.circular(30),
-                      //     ),
-                      //     child: Text(
-                      //       "Sign Up As Organization",
-                      //       style: mediumTextStyle(),
-                      //     ),
-                      //   ),
-                      // ),
                       SizedBox(
                         height: 16,
                       ),
