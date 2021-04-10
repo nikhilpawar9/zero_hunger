@@ -1,10 +1,5 @@
 # zero_hunger
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
+Food Donation app which connects Food Donators to volunteers and NGO's
 
 A few resources to get you started if this is your first Flutter project:
 
